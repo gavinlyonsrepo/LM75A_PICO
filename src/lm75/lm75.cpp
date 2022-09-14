@@ -166,14 +166,14 @@ uint8_t LIB_LM75A::read8bitRegister(const uint8_t reg)
 	uint8_t BufTx[1];
 	BufTx[0] = reg;
 
-	return_value = i2c_write_blocking(i2c, _i2cAddress, BufTx, 1 , 1);
-	if (return_value == 0)
+	return_value = i2c_write_blocking(i2c, _i2cAddress, BufTx, 1 , true);
+	if (return_value < 1)
 	{
 		return 0xFF;
 	}
 
-	return_value =  i2c_read_blocking(i2c, _i2cAddress, &result, 1, 1); 	
-	if (return_value == 0)
+	return_value =  i2c_read_blocking(i2c, _i2cAddress, &result, 1, false); 	
+	if (return_value < 1)
 	{
 		return 0xFF;
 	}
@@ -186,14 +186,14 @@ bool LIB_LM75A::read16bitRegister(const uint8_t reg, uint16_t& response)
 	uint8_t bufTX[1];
 	bufTX[0] = reg;
 
-	return_value = i2c_write_blocking(i2c, _i2cAddress, bufTX, 1 , 1);
-	if (return_value == 0)
+	return_value = i2c_write_blocking(i2c, _i2cAddress, bufTX, 1 , true);
+	if (return_value < 1)
 	{
 		return false;
 	}
 
-	return_value =  i2c_read_blocking(i2c, _i2cAddress, bufRX, 2, 1); 
-	if (return_value == 0)
+	return_value =  i2c_read_blocking(i2c, _i2cAddress, bufRX, 2, false); 
+	if (return_value < 1)
 	{
 		return false;
 	}
@@ -209,8 +209,8 @@ bool LIB_LM75A::write16bitRegister(const uint8_t reg, const uint16_t value)
 	bufTX[1] = value >> 8;
 	bufTX[2] = value;
 		
-	return_value = i2c_write_blocking(i2c, _i2cAddress, bufTX, 3 , 1);
-	if (return_value == 0)
+	return_value = i2c_write_blocking(i2c, _i2cAddress, bufTX, 3 , false);
+	if (return_value < 1)
 	{
 		return false;
 	}
@@ -224,21 +224,23 @@ bool LIB_LM75A::write8bitRegister(const uint8_t reg, const uint8_t value)
 	bufTX[0] = reg;
 	bufTX[1] = value;
 
-	return_value = i2c_write_blocking(i2c, _i2cAddress, bufTX, 2 ,1);
-	if (return_value == 0)
+	return_value = i2c_write_blocking(i2c, _i2cAddress, bufTX, 2 ,false);
+	if (return_value < 1)
 	{
 		return false;
 	}
 	return true;
 }
 
-void LIB_LM75A::initLM75A(i2c_inst_t* i2c_type, uint8_t SDApin, uint8_t SCLKpin)
+void LIB_LM75A::initLM75A(i2c_inst_t* i2c_type, uint8_t SDApin, uint8_t SCLKpin, uint16_t CLKspeed)
 {
 	i2c_inst_t *i2c = i2c_type;
 	//init I2C
-	i2c_init(i2c, 400 * 1000);
+	i2c_init(i2c, CLKspeed * 1000);
 	gpio_set_function(SDApin, GPIO_FUNC_I2C);
     gpio_set_function(SCLKpin, GPIO_FUNC_I2C);
+	gpio_pull_up(SDApin);
+    gpio_pull_up(SCLKpin);
 }
 
 void LIB_LM75A::deinitLM75A(i2c_inst_t* i2c_type)

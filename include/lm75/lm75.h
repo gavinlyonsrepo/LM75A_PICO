@@ -67,7 +67,7 @@ public:
     LIB_LM75A(uint8_t address);
 
 	//I2c init & deinit
-	void initLM75A(i2c_inst_t* i2c_type, uint8_t  SDApin, uint8_t  SCLKpin);
+	void initLM75A(i2c_inst_t* i2c_type, uint8_t  SDApin, uint8_t  SCLKpin, uint16_t CLKspeed);
 	void deinitLM75A(i2c_inst_t* i2c_type);
 
 	// Power management
@@ -97,7 +97,7 @@ public:
 	float getProdId();
 
     i2c_inst_t *i2c = i2c0;  // i2C port number
-    uint16_t return_value = 0; //return value
+    int16_t return_value = 0; //return value
 };
 
 #endif
