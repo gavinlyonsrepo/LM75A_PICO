@@ -14,7 +14,7 @@ Library for LM75A  temperature sensor
 
 Features
 ----------------------
- ![mod](https://github.com/gavinlyonsrepo/STM32_projects/blob/master/images/lm75a.jpg)
+ ![mod](https://github.com/gavinlyonsrepo/STM32_projects/blob/master/extra/images/lm75a.jpg)
  
 This is a library for TI LM75A Digital Temperature Sensor and Thermal Watchdog With Two-Wire Interface Temperature Sensor I2C.
 
