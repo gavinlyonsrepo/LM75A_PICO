@@ -67,7 +67,7 @@ Can also be toggled between Celsius and Fahrenheit.
 1. Basic Usage
 2. Library test  routine
 
-![mod1](https://github.com/gavinlyonsrepo/STM32_projects/tree/master/extra/images/lm75aoutput.jpg)
+![mod1](https://github.com/gavinlyonsrepo/STM32_projects/blob/master/extra/images/lm75aoutput.jpg)
 
 **Datasheet**
 
