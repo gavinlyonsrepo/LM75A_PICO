@@ -50,26 +50,26 @@ Set the functional mode, Tos and Thyst: if that functionally desired.
 
 **Connections**
 
-The Sensor uses I2C for communication's, Data is outputted to a PC.
+The Sensor uses I2C for communication's, data is outputted to a PC.
 Pins and I2C port can be set in the main.cpp. Default is I2C0 and GPIO16(data) GPIO17(clock).
 If you want to use the other I2C port (I2C1) in addition to changing in the main.ccp,
 The user must change it in library (lm75.h) as well:
-* i2c_inst_t *i2c = i2c0  to i2c_inst_t *i2c = i2c1
-Could not find a way aroudn this.
+* i2c_inst_t *i2c = i2c0 to i2c_inst_t *i2c = i2c1
+Could not find a way around this.
  
 **Files**
 
-The Main.cpp contains tests showing library functions
+The main.cpp contains tests showing library functions
 There is also the library files(LM75A.cpp and LM75A.h),
 
 **Output**
 
 Data is outputted  to the PC.
-Switch between the  two routines modes by changing define statement in main.cpp 
+Switch between the two routines modes by changing define statement in main.cpp 
 Can also be toggled between Celsius and Fahrenheit. 
  
 1. Basic Usage
-2. Library test  routine
+2. Library test routine
 
 ![mod1](https://github.com/gavinlyonsrepo/STM32_projects/blob/master/extra/images/lm75aoutput.jpg)
 
