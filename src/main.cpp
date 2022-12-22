@@ -12,7 +12,7 @@
 // *** Libraries ***
 #include <stdio.h>
 #include "pico/stdlib.h"
-#include "lm75/lm75.h"
+#include "lm75/lm75.hpp"
 
 // *** Mode select ***
 // mode 1 or mode 2
@@ -20,7 +20,7 @@
 //#define LIB_TEST // Mode 2 :: Full library test example
 
 // *** Globals ***
-LIB_LM75A lm75a(LM75A_DEFAULT_ADDRESS);
+LIB_LM75A lm75a(LM75A_DEFAULT_ADDRESS, i2c0, 16, 17, 100);
 uint8_t is_connected = 0; // test control
 uint16_t test_count = 0 ;   // test control
 
@@ -59,11 +59,10 @@ DeviceMode newDeviceMode = DeviceMode::DEVICE_MODE_INTERRUPT;
 // *** Main ***
 int main()
 {
-  stdio_init_all();              // Initialize chosen serial port
-  lm75a.initLM75A(i2c0, 16, 17, 100); // initLM75A(port, data pin, clock pin, clock speed(KHZ));
-  
+  stdio_init_all(); // Initialize chosen serial port
   busy_wait_ms(1000);
   printf("LM75 : Start!\r\n");
+  lm75a.initLM75A(); 
   
   // Check for connection
   is_connected = lm75a.isConnected();

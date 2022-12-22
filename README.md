@@ -51,16 +51,12 @@ Set the functional mode, Tos and Thyst: if that functionally desired.
 **Connections**
 
 The Sensor uses I2C for communication's, data is outputted to a PC.
-Pins and I2C port can be set in the main.cpp. Default is I2C0 and GPIO16(data) GPIO17(clock).
-If you want to use the other I2C port (I2C1) in addition to changing in the main.ccp,
-The user must change it in library (lm75.h) as well:
-* i2c_inst_t *i2c = i2c0 to i2c_inst_t *i2c = i2c1
-Could not find a way around this.
+Pins and I2C port(I2C0 or I2C1) can be set in the main.cpp. Default is I2C0 and GPIO16(data) GPIO17(clock).
  
 **Files**
 
 The main.cpp contains tests showing library functions
-There is also the library files(LM75A.cpp and LM75A.h),
+There is also the library files(LM75A.cpp and LM75A.hpp),
 
 **Output**
 

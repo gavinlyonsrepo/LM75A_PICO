@@ -1,6 +1,6 @@
 /*
  * Project Name: Library for the LM75A temperature sensor by NXP and Texas Instruments.
- * File: lm75.h
+ * File: lm75.hpp
  * Description: library header file
  * Author: Gavin Lyons.
  * IDE:  Rpi=PICo rp2040 C++
@@ -53,7 +53,11 @@ class LIB_LM75A
 {
 private:
 	// Private variables
-	uint8_t _i2cAddress;
+	uint8_t _i2cAddress; 
+	i2c_inst_t *i2c = i2c0;  // i2C port number, i2c1 or i2c0
+    uint8_t _SDataPin;
+    uint8_t _SClkPin;
+    uint16_t _CLKSpeed = 100; //I2C bus speed in khz typically 100-400
 
 	// Private functions
 	uint8_t read8bitRegister(const uint8_t reg);
@@ -64,11 +68,11 @@ private:
 public:
 
 	// Constructor
-    LIB_LM75A(uint8_t address);
+    LIB_LM75A(uint8_t address, i2c_inst_t* i2c_type, uint8_t SDApin, uint8_t  SCLKpin, uint16_t CLKspeed);
 
 	//I2c init & deinit
-	void initLM75A(i2c_inst_t* i2c_type, uint8_t  SDApin, uint8_t  SCLKpin, uint16_t CLKspeed);
-	void deinitLM75A(i2c_inst_t* i2c_type);
+	void initLM75A();
+	void deinitLM75A();
 
 	// Power management
 	void shutdown();
@@ -96,8 +100,7 @@ public:
 	uint8_t getConfig();
 	float getProdId();
 
-    i2c_inst_t *i2c = i2c0;  // i2C port number
-    int16_t return_value = 0; //return value
+	int16_t return_value = 0; //return value, I2C routines
 };
 
 #endif
